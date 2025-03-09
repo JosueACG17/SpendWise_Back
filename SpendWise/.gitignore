@@ -1,0 +1,17 @@
+# Ignorar archivos binarios y obj de .NET
+bin/
+obj/
+
+.env
+
+# Ignorar el directorio de configuración de Visual Studio
+.vs/
+
+# Ignorar el archivo de configuración de Rider
+.idea/
+
+# Ignorar archivos de configuración específicos de usuario
+*.user
+*.userosscache
+*.suo
+*.userprefs
