@@ -20,11 +20,18 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] AuthDTO authDTO)
     {
+        // Verificar si el correo ya existe
+        var existingUser = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
+        if (existingUser != null)
+        {
+            return BadRequest(new { message = "El correo ya está en uso." });
+        }
+
         var usuario = new Usuario
         {
             Email = authDTO.Email,
             Contraseña = BCrypt.Net.BCrypt.HashPassword(authDTO.Contraseña),
-            FechaRegistro = DateTime.UtcNow 
+            FechaRegistro = DateTime.UtcNow
         };
 
         await _usuariosService.AddUsuarioAsync(usuario);
@@ -34,8 +41,12 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] AuthDTO authDTO)
     {
-        var usuario = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
+        if (authDTO == null)
+        {
+            return BadRequest(new { message = "Datos de inicio de sesión inválidos" });
+        }
 
+        var usuario = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
         if (usuario == null || !BCrypt.Net.BCrypt.Verify(authDTO.Contraseña, usuario.Contraseña))
         {
             return Unauthorized(new { message = "Credenciales inválidas" });
@@ -49,8 +60,9 @@ public class AuthController : ControllerBase
     [Authorize]
     public IActionResult Logout()
     {
+        // Los JWT son stateless, no se pueden invalidar directamente.
+        // El "logout" se maneja en el frontend eliminando el token de la memoria.
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         return Ok(new { message = "Sesión cerrada exitosamente", userId });
     }
-
 }

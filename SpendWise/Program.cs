@@ -38,6 +38,19 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Configuración de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin() 
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
+
 // Inyecciones de dependencias
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<UsuariosRepository>();
@@ -59,6 +72,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Habilitar CORS
+app.UseCors("AllowAllOrigins");
+
+app.UseAuthentication(); // Asegúrate de que esto esté antes de UseAuthorization
 app.UseAuthorization();
 
 app.MapControllers();
