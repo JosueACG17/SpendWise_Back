@@ -54,7 +54,11 @@ public class AppDbContext : DbContext
             .HasOne(p => p.Usuario)
             .WithOne(u => u.Perfil)
             .HasForeignKey<Perfil>(p => p.UsuarioId)
-            .OnDelete(DeleteBehavior.Cascade); 
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
     }
 
 

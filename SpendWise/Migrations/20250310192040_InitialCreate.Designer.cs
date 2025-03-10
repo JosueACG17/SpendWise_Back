@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SpendWise.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250309160657_InitialCreate")]
+    [Migration("20250310192040_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -201,12 +201,15 @@ namespace SpendWise.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });
