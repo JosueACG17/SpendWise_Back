@@ -7,16 +7,8 @@
       "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,6 +25,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\cgjos\\onedrive\\documentos\\practicas.net\\spendwise\\spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +46,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Services\\JwtService.cs",
+              "RelativeDocumentMoniker": "SpendWise\\Services\\JwtService.cs",
+              "ToolTip": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Services\\JwtService.cs",
+              "RelativeToolTip": "SpendWise\\Services\\JwtService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T03:08:34.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Context\\AppDbContext.cs",
               "RelativeDocumentMoniker": "SpendWise\\Context\\AppDbContext.cs",
@@ -54,12 +71,11 @@
               "RelativeToolTip": "SpendWise\\Context\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-10T19:09:15.52Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-10T19:09:15.52Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "SpendWise\\Models\\Usuario.cs",
@@ -72,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "UsuarioDTO.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\DTOs\\UsuarioDTO.cs",
               "RelativeDocumentMoniker": "SpendWise\\DTOs\\UsuarioDTO.cs",
@@ -85,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "AuthDTO.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\DTOs\\AuthDTO.cs",
               "RelativeDocumentMoniker": "SpendWise\\DTOs\\AuthDTO.cs",
@@ -98,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "UsuarioServices.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Services\\UsuarioServices.cs",
               "RelativeDocumentMoniker": "SpendWise\\Services\\UsuarioServices.cs",
@@ -111,13 +127,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "UsuariosRepository.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Repositories\\UsuariosRepository.cs",
               "RelativeDocumentMoniker": "SpendWise\\Repositories\\UsuariosRepository.cs",
               "ToolTip": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Repositories\\UsuariosRepository.cs",
               "RelativeToolTip": "SpendWise\\Repositories\\UsuariosRepository.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAcwBAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAuwBAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T18:25:08.785Z",
               "EditorCaption": ""
@@ -130,20 +146,20 @@
               "RelativeDocumentMoniker": "SpendWise\\Program.cs",
               "ToolTip": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Program.cs",
               "RelativeToolTip": "SpendWise\\Program.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAmwCkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAABUAAAB2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T18:06:09.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "SpendWise\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\cgjos\\OneDrive\\Documentos\\Practicas.net\\SpendWise\\SpendWise\\Controllers\\AuthController.cs",
               "RelativeToolTip": "SpendWise\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAowDQAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAEwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T16:09:46.41Z",
               "EditorCaption": ""

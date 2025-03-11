@@ -1,23 +1,25 @@
-using DotNetEnv; // Agrega esta línea al inicio
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Cargar variables de entorno desde el archivo .env
-Env.Load(); // Esto carga el archivo .env
+Env.Load();
 
 // Configuración de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
-        Environment.GetEnvironmentVariable("DefaultConnection"))); // Usa variable de entorno si no está en appsettings.json
+        Environment.GetEnvironmentVariable("DefaultConnection")));
 
 // Configuración de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = Encoding.ASCII.GetBytes(jwtSettings["Key"] ?? Environment.GetEnvironmentVariable("JWT__Key"));
+
+var key = Encoding.ASCII.GetBytes(jwtSettings["Key"] ?? Environment.GetEnvironmentVariable("JWT__Key") ?? "ClavePorDefecto");
+var issuer = jwtSettings["Issuer"] ?? Environment.GetEnvironmentVariable("JWT__Issuer") ?? "IssuerPorDefecto";
+var audience = jwtSettings["Audience"] ?? Environment.GetEnvironmentVariable("JWT__Audience") ?? "AudiencePorDefecto";
 
 builder.Services.AddAuthentication(options =>
 {
@@ -32,8 +34,8 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"] ?? Environment.GetEnvironmentVariable("JWT__Issuer"),
-        ValidAudience = jwtSettings["Audience"] ?? Environment.GetEnvironmentVariable("JWT__Audience"),
+        ValidIssuer = issuer,
+        ValidAudience = audience,
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
@@ -44,12 +46,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAllOrigins",
         builder =>
         {
-            builder.AllowAnyOrigin() 
+            builder.AllowAnyOrigin()
                    .AllowAnyHeader()
                    .AllowAnyMethod();
         });
 });
-
 
 // Inyecciones de dependencias
 builder.Services.AddScoped<JwtService>();
@@ -57,7 +58,6 @@ builder.Services.AddScoped<UsuariosRepository>();
 builder.Services.AddScoped<UsuariosService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -75,7 +75,7 @@ app.UseHttpsRedirection();
 // Habilitar CORS
 app.UseCors("AllowAllOrigins");
 
-app.UseAuthentication(); // Asegúrate de que esto esté antes de UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

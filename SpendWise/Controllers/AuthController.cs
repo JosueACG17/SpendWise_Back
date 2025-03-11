@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SpendWise.DTOs;
 using SpendWise.Models;
-using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -10,17 +13,18 @@ public class AuthController : ControllerBase
 {
     private readonly UsuariosService _usuariosService;
     private readonly JwtService _jwtService;
+    private readonly IConfiguration _configuration;
 
-    public AuthController(UsuariosService usuariosService, JwtService jwtService)
+    public AuthController(UsuariosService usuariosService, JwtService jwtService, IConfiguration configuration)
     {
         _usuariosService = usuariosService;
         _jwtService = jwtService;
+        _configuration = configuration; 
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] AuthDTO authDTO)
     {
-        // Verificar si el correo ya existe
         var existingUser = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
         if (existingUser != null)
         {
@@ -56,13 +60,41 @@ public class AuthController : ControllerBase
         return Ok(new { token });
     }
 
-    [HttpPost("logout")]
     [Authorize]
-    public IActionResult Logout()
+    [HttpGet("validate-token")]
+    public IActionResult ValidateToken()
     {
-        // Los JWT son stateless, no se pueden invalidar directamente.
-        // El "logout" se maneja en el frontend eliminando el token de la memoria.
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return Ok(new { message = "Sesión cerrada exitosamente", userId });
+        try
+        {
+            var authHeader = Request.Headers["Authorization"].ToString();
+            if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized(new { message = "Token inválido" });
+            }
+
+            var token = authHeader.Substring(7);
+            var jwtSettings = _configuration.GetSection("Jwt"); 
+            var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = true,
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidateAudience = true,
+                ValidAudience = jwtSettings["Audience"],
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            tokenHandler.ValidateToken(token, validationParameters, out _);
+            return Ok(new { message = "Token válido" });
+        }
+        catch
+        {
+            return Unauthorized(new { message = "Token inválido o expirado" });
+        }
     }
 }
