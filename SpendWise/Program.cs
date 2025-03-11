@@ -1,4 +1,4 @@
-using DotNetEnv; // Agrega esta línea al inicio
+using DotNetEnv; // Agrega esta lï¿½nea al inicio
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,12 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Cargar variables de entorno desde el archivo .env
 Env.Load(); // Esto carga el archivo .env
 
-// Configuración de la base de datos
+// Configuraciï¿½n de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
-        Environment.GetEnvironmentVariable("DefaultConnection"))); // Usa variable de entorno si no está en appsettings.json
+        Environment.GetEnvironmentVariable("DefaultConnection"))); // Usa variable de entorno si no estï¿½ en appsettings.json
 
-// Configuración de JWT
+// Configuraciï¿½n de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"] ?? Environment.GetEnvironmentVariable("JWT__Key"));
 
@@ -38,7 +38,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Configuración de CORS
+// Configuraciï¿½n de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -75,7 +75,7 @@ app.UseHttpsRedirection();
 // Habilitar CORS
 app.UseCors("AllowAllOrigins");
 
-app.UseAuthentication(); // Asegúrate de que esto esté antes de UseAuthorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
