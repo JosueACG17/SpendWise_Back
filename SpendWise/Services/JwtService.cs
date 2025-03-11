@@ -9,7 +9,7 @@ public class JwtService
 
     public JwtService(IConfiguration configuration)
     {
-        _configuration = configuration;
+        _configuration = configuration; // Inyectar IConfiguration
     }
 
     public string GenerateToken(int userId, string email)

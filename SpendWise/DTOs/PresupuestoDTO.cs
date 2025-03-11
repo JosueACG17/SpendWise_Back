@@ -1,4 +1,5 @@
-﻿namespace SpendWise.DTOs
+﻿using Microsoft.EntityFrameworkCore;
+namespace SpendWise.DTOs
 {
     public class PresupuestoDTO
     {
