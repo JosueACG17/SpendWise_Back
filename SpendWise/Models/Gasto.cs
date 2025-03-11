@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpendWise.Models
 {
@@ -7,7 +8,10 @@ namespace SpendWise.Models
         [Key]
         public int Id { get; set; }
         public int UsuarioId { get; set; }
+
+        [Precision(18, 2)]
         public decimal Monto { get; set; }
+        
         public int CategoriaId { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; }

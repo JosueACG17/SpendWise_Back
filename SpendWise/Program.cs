@@ -1,4 +1,4 @@
-using DotNetEnv;
+using DotNetEnv; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -9,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Cargar variables de entorno desde el archivo .env
 Env.Load();
 
-// Configuración de la base de datos
+// Configuraciï¿½n de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
-        Environment.GetEnvironmentVariable("DefaultConnection")));
+        Environment.GetEnvironmentVariable("DefaultConnection"))); 
 
-// Configuración de JWT
+// Configuraciï¿½n de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"] ?? Environment.GetEnvironmentVariable("JWT__Key") ?? "ClavePorDefecto");
@@ -40,7 +40,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Configuración de CORS
+// Configuraciï¿½n de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
