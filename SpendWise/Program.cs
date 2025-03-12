@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CloudinaryDotNet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,17 @@ Env.Load();
 // Configuraci�n de la base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
-        Environment.GetEnvironmentVariable("DefaultConnection"))); 
+        Environment.GetEnvironmentVariable("DefaultConnection")));
+
+// Configuración de Cloudinary
+var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
+var account = new Account(
+    cloudinarySettings["CloudName"],
+    cloudinarySettings["ApiKey"],
+    cloudinarySettings["ApiSecret"]
+);
+var cloudinary = new Cloudinary(account);
+builder.Services.AddSingleton(cloudinary);
 
 // Configuraci�n de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -56,6 +67,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<UsuariosRepository>();
 builder.Services.AddScoped<UsuariosService>();
+builder.Services.AddScoped<ErrorLogRepository>();
+builder.Services.AddScoped<ErrorLogService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

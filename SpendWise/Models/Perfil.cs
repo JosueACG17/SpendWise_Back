@@ -12,7 +12,6 @@ namespace SpendWise.Models
         public int Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }
-        public bool NotificacionesActivas { get; set; }
         public Usuario Usuario { get; set; }
     }
 }

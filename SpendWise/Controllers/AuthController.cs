@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SpendWise.DTOs;
@@ -14,50 +13,82 @@ public class AuthController : ControllerBase
     private readonly UsuariosService _usuariosService;
     private readonly JwtService _jwtService;
     private readonly IConfiguration _configuration;
+    private readonly AppDbContext _context;
 
-    public AuthController(UsuariosService usuariosService, JwtService jwtService, IConfiguration configuration)
+    public AuthController(UsuariosService usuariosService, JwtService jwtService, IConfiguration configuration, AppDbContext context)
     {
         _usuariosService = usuariosService;
         _jwtService = jwtService;
-        _configuration = configuration; 
+        _configuration = configuration;
+        _context = context;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] AuthDTO authDTO)
     {
-        var existingUser = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
-        if (existingUser != null)
+        try
         {
-            return BadRequest(new { message = "El correo ya está en uso." });
+            var existingUser = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
+            if (existingUser != null)
+            {
+                return BadRequest(new { message = "El correo ya está en uso." });
+            }
+
+            var usuario = new Usuario
+            {
+                Email = authDTO.Email,
+                Contraseña = BCrypt.Net.BCrypt.HashPassword(authDTO.Contraseña),
+                FechaRegistro = DateTime.UtcNow
+            };
+
+            await _usuariosService.AddUsuarioAsync(usuario);
+            return Ok(new { message = "Usuario registrado exitosamente" });
         }
-
-        var usuario = new Usuario
+        catch (Exception ex)
         {
-            Email = authDTO.Email,
-            Contraseña = BCrypt.Net.BCrypt.HashPassword(authDTO.Contraseña),
-            FechaRegistro = DateTime.UtcNow
-        };
-
-        await _usuariosService.AddUsuarioAsync(usuario);
-        return Ok(new { message = "Usuario registrado exitosamente" });
+            var errorLog = new ErrorLogs
+            {
+                Mensaje_error = ex.Message,
+                Enlace_error = HttpContext.Request.Path,
+                Fecha_error = DateTime.UtcNow
+            };
+            _context.ErrorLogs.Add(errorLog);
+            await _context.SaveChangesAsync();
+            return StatusCode(500, new { message = "Ocurrió un error interno al registrar el usuario." });
+        }
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] AuthDTO authDTO)
     {
-        if (authDTO == null)
+        try
         {
-            return BadRequest(new { message = "Datos de inicio de sesión inválidos" });
-        }
+            if (authDTO == null)
+            {
+                return BadRequest(new { message = "Datos de inicio de sesión inválidos" });
+            }
 
-        var usuario = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
-        if (usuario == null || !BCrypt.Net.BCrypt.Verify(authDTO.Contraseña, usuario.Contraseña))
+            var usuario = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
+            if (usuario == null || !BCrypt.Net.BCrypt.Verify(authDTO.Contraseña, usuario.Contraseña))
+            {
+                return Unauthorized(new { message = "Credenciales inválidas" });
+            }
+
+            var token = _jwtService.GenerateToken(usuario.Id, usuario.Email);
+            return Ok(new { token });
+        }
+        catch (Exception ex)
         {
-            return Unauthorized(new { message = "Credenciales inválidas" });
+            var errorLog = new ErrorLogs
+            {
+                Mensaje_error = ex.Message,
+                Enlace_error = HttpContext.Request.Path,
+                Fecha_error = DateTime.UtcNow
+            };
+            _context.ErrorLogs.Add(errorLog);
+            await _context.SaveChangesAsync();
+            return StatusCode(500, new { message = "Ocurrió un error interno al iniciar sesión." });
         }
-
-        var token = _jwtService.GenerateToken(usuario.Id, usuario.Email);
-        return Ok(new { token });
     }
 
     [Authorize]
@@ -92,8 +123,17 @@ public class AuthController : ControllerBase
             tokenHandler.ValidateToken(token, validationParameters, out _);
             return Ok(new { message = "Token válido" });
         }
-        catch
+        catch (Exception ex)
         {
+            var errorLog = new ErrorLogs
+            {
+                Mensaje_error = ex.Message,
+                Enlace_error = HttpContext.Request.Path,
+                Fecha_error = DateTime.UtcNow
+            };
+
+            _context.ErrorLogs.Add(errorLog);
+            _context.SaveChanges();
             return Unauthorized(new { message = "Token inválido o expirado" });
         }
     }

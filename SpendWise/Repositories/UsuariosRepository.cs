@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpendWise.Models;
-using System.Threading.Tasks;
 
 public class UsuariosRepository
 {
