@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Gasto> Gastos { get; set; }
     public DbSet<Presupuesto> Presupuestos { get; set; }
     public DbSet<Etiqueta> Etiquetas { get; set; }
+    public DbSet<ErrorLogs> ErrorLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
