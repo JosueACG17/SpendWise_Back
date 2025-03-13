@@ -12,9 +12,27 @@ public class AppDbContext : DbContext
     public DbSet<Presupuesto> Presupuestos { get; set; }
     public DbSet<Etiqueta> Etiquetas { get; set; }
     public DbSet<ErrorLogs> ErrorLogs { get; set; }
+    public DbSet<Rol> Roles { get; set; } 
+    public DbSet<Token> Tokens { get; set; } 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        modelBuilder.Entity<Rol>().HasData(
+            new Rol { Id = 1, Nombre = "Administrador" },
+            new Rol { Id = 2, Nombre = "Usuario" }
+        );
+        modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.Rol)
+            .WithMany()
+            .HasForeignKey(u => u.RolId);
+
+        modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.Rol)
+            .WithMany(r => r.Usuarios)
+            .HasForeignKey(u => u.RolId)
+            .OnDelete(DeleteBehavior.Restrict); 
+
         modelBuilder.Entity<Gasto>()
             .HasOne(g => g.Usuario)
             .WithMany(u => u.Gastos)

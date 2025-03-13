@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CloudinaryDotNet;
+using SpendWise.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,8 @@ builder.Services.AddScoped<UsuariosRepository>();
 builder.Services.AddScoped<UsuariosService>();
 builder.Services.AddScoped<ErrorLogRepository>();
 builder.Services.AddScoped<ErrorLogService>();
+builder.Services.AddHostedService<TokenCleanupService>();
+builder.Services.AddScoped<UserTokenService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
