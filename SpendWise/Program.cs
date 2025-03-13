@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CloudinaryDotNet;
+using SpendWise.Services;
+using SpendWise.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,14 +18,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         Environment.GetEnvironmentVariable("DefaultConnection")));
 
 // Configuración de Cloudinary
-var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
-var account = new Account(
-    cloudinarySettings["CloudName"],
-    cloudinarySettings["ApiKey"],
-    cloudinarySettings["ApiSecret"]
+var cloudinaryAccount = new Account(
+    builder.Configuration["Cloudinary:CloudName"],
+    builder.Configuration["Cloudinary:ApiKey"],
+    builder.Configuration["Cloudinary:ApiSecret"]
 );
-var cloudinary = new Cloudinary(account);
-builder.Services.AddSingleton(cloudinary);
+builder.Services.AddSingleton(new Cloudinary(cloudinaryAccount));
 
 // Configuraci�n de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -69,6 +69,9 @@ builder.Services.AddScoped<UsuariosRepository>();
 builder.Services.AddScoped<UsuariosService>();
 builder.Services.AddScoped<ErrorLogRepository>();
 builder.Services.AddScoped<ErrorLogService>();
+builder.Services.AddScoped<CloudinaryService>();
+builder.Services.AddScoped<PerfilRepository>();
+builder.Services.AddScoped<PerfilService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

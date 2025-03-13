@@ -3,40 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\models\\perfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\models\\perfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\dtos\\perfildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\perfildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\services\\perfilservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\services\\perfilservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\repositories\\perfilrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\repositories\\perfilrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\controllers\\perfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\controllers\\perfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\repositories\\errorlogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\repositories\\errorlogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\services\\errorlogservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\services\\errorlogservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\controllers\\errorlogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\controllers\\errorlogscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\models\\errorlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\models\\errorlogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\dtos\\errorlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\dtos\\errorlogdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|c:\\users\\josef\\onedrive\\escritorio\\spendwise_back\\spendwise\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{21B80F74-E269-4677-A57E-14DDF576E564}|SpendWise\\SpendWise.csproj|solutionrelative:spendwise\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,113 +50,102 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsuarioDTO.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\UsuarioDTO.cs",
-              "RelativeDocumentMoniker": "SpendWise\\DTOs\\UsuarioDTO.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\UsuarioDTO.cs",
-              "RelativeToolTip": "SpendWise\\DTOs\\UsuarioDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "PerfilServices.cs",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Services\\PerfilServices.cs",
+              "RelativeDocumentMoniker": "SpendWise\\Services\\PerfilServices.cs",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Services\\PerfilServices.cs",
+              "RelativeToolTip": "SpendWise\\Services\\PerfilServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:53:27.983Z",
+              "WhenOpened": "2025-03-12T14:54:54.403Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Program.cs",
               "RelativeDocumentMoniker": "SpendWise\\Program.cs",
               "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Program.cs",
               "RelativeToolTip": "SpendWise\\Program.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAEYAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:35:34.99Z"
+              "WhenOpened": "2025-03-12T15:16:32.198Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ErrorLogsController.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\ErrorLogsController.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Controllers\\ErrorLogsController.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\ErrorLogsController.cs",
-              "RelativeToolTip": "SpendWise\\Controllers\\ErrorLogsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T04:30:35.531Z"
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\appsettings.json",
+              "RelativeDocumentMoniker": "SpendWise\\appsettings.json",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\appsettings.json",
+              "RelativeToolTip": "SpendWise\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-12T15:15:56.734Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "SpendWise\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAJAAAAAAAAAA==",
+              "Title": "PerfilDTO.cs",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\PerfilDTO.cs",
+              "RelativeDocumentMoniker": "SpendWise\\DTOs\\PerfilDTO.cs",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\PerfilDTO.cs",
+              "RelativeToolTip": "SpendWise\\DTOs\\PerfilDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T01:06:39.49Z",
+              "WhenOpened": "2025-03-12T15:04:39.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ErrorLogServices.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Services\\ErrorLogServices.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Services\\ErrorLogServices.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Services\\ErrorLogServices.cs",
-              "RelativeToolTip": "SpendWise\\Services\\ErrorLogServices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Title": "PerfilController.cs",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\PerfilController.cs",
+              "RelativeDocumentMoniker": "SpendWise\\Controllers\\PerfilController.cs",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Controllers\\PerfilController.cs",
+              "RelativeToolTip": "SpendWise\\Controllers\\PerfilController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAmwBkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T00:50:48.012Z"
+              "WhenOpened": "2025-03-12T14:56:01.387Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ErrorLogRepository.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Repositories\\ErrorLogRepository.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Repositories\\ErrorLogRepository.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Repositories\\ErrorLogRepository.cs",
-              "RelativeToolTip": "SpendWise\\Repositories\\ErrorLogRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Title": "PerfilRepository.cs",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Repositories\\PerfilRepository.cs",
+              "RelativeDocumentMoniker": "SpendWise\\Repositories\\PerfilRepository.cs",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Repositories\\PerfilRepository.cs",
+              "RelativeToolTip": "SpendWise\\Repositories\\PerfilRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:54:49.313Z"
+              "WhenOpened": "2025-03-12T14:54:00.061Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Context\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Context\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Context\\AppDbContext.cs",
-              "RelativeToolTip": "SpendWise\\Context\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Perfil.cs",
+              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Models\\Perfil.cs",
+              "RelativeDocumentMoniker": "SpendWise\\Models\\Perfil.cs",
+              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Models\\Perfil.cs",
+              "RelativeToolTip": "SpendWise\\Models\\Perfil.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:57:15.693Z"
-            },
+              "WhenOpened": "2025-03-12T14:36:41.872Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1197,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ErrorLogDTO.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\ErrorLogDTO.cs",
-              "RelativeDocumentMoniker": "SpendWise\\DTOs\\ErrorLogDTO.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\DTOs\\ErrorLogDTO.cs",
-              "RelativeToolTip": "SpendWise\\DTOs\\ErrorLogDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:52:32.825Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ErrorLogs.cs",
-              "DocumentMoniker": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Models\\ErrorLogs.cs",
-              "RelativeDocumentMoniker": "SpendWise\\Models\\ErrorLogs.cs",
-              "ToolTip": "C:\\Users\\josef\\OneDrive\\Escritorio\\SpendWise_Back\\SpendWise\\Models\\ErrorLogs.cs",
-              "RelativeToolTip": "SpendWise\\Models\\ErrorLogs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T22:29:02.979Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }
