@@ -19,19 +19,22 @@ public class AuthController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly ErrorLogService _errorLogService;
     private readonly UserTokenService _userTokenService;
+    private readonly AppDbContext _context;
 
 
     public AuthController(
         UsuariosService usuariosService,
         JwtService jwtService,
         UserTokenService userTokenService, IConfiguration configuration,
-        ErrorLogService errorLogService)
+        ErrorLogService errorLogService, AppDbContext context)
     {
+        _context = context;
         _usuariosService = usuariosService;
         _jwtService = jwtService;
         _configuration = configuration;
         _errorLogService = errorLogService;
         _userTokenService = userTokenService;
+        _context = context;
     }
 
     [HttpPost("register")]
