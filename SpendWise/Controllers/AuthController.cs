@@ -1,11 +1,14 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SpendWise.DTOs;
 using SpendWise.Models;
+using SpendWise.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+
 
 [ApiController]
 [Route("api/[controller]")]
@@ -15,17 +18,20 @@ public class AuthController : ControllerBase
     private readonly JwtService _jwtService;
     private readonly IConfiguration _configuration;
     private readonly ErrorLogService _errorLogService;
+    private readonly UserTokenService _userTokenService;
+
 
     public AuthController(
         UsuariosService usuariosService,
         JwtService jwtService,
-        IConfiguration configuration,
+        UserTokenService userTokenService, IConfiguration configuration,
         ErrorLogService errorLogService)
     {
         _usuariosService = usuariosService;
         _jwtService = jwtService;
         _configuration = configuration;
         _errorLogService = errorLogService;
+        _userTokenService = userTokenService;
     }
 
     [HttpPost("register")]
@@ -41,7 +47,8 @@ public class AuthController : ControllerBase
             {
                 Email = authDTO.Email,
                 Contraseña = BCrypt.Net.BCrypt.HashPassword(authDTO.Contraseña),
-                FechaRegistro = DateTime.UtcNow
+                FechaRegistro = DateTime.UtcNow,
+                RolId = 2 
             };
 
             await _usuariosService.AddUsuarioAsync(usuario);
@@ -66,7 +73,27 @@ public class AuthController : ControllerBase
             if (usuario == null || !BCrypt.Net.BCrypt.Verify(authDTO.Contraseña, usuario.Contraseña))
                 return Unauthorized(new { message = "Credenciales inválidas" });
 
-            var token = _jwtService.GenerateToken(usuario.Id, usuario.Email);
+            var existingToken = await _context.Tokens
+                .FirstOrDefaultAsync(t => t.UsuarioId == usuario.Id && t.FechaExpiracion > DateTime.UtcNow);
+
+            if (existingToken != null)
+            {
+                return Ok(new { token = existingToken.JwtToken });
+            }
+
+            var token = _jwtService.GenerateToken(usuario.Id, usuario.Email, usuario.Rol.Nombre);
+
+            var tokenEntity = new Token
+            {
+                JwtToken = token,
+                UsuarioId = usuario.Id,
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:ExpireMinutes"]))
+            };
+
+            _context.Tokens.Add(tokenEntity);
+            await _context.SaveChangesAsync();
+
             return Ok(new { token });
         }
         catch (Exception ex)
@@ -87,6 +114,15 @@ public class AuthController : ControllerBase
                 return Unauthorized(new { message = "Token inválido" });
 
             var token = authHeader.Substring(7);
+
+            var tokenEntity = await _context.Tokens
+                .FirstOrDefaultAsync(t => t.JwtToken == token && t.FechaExpiracion > DateTime.UtcNow);
+
+            if (tokenEntity == null)
+            {
+                return Unauthorized(new { message = "Token inválido o expirado" });
+            }
+
             var jwtSettings = _configuration.GetSection("Jwt");
             var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
@@ -108,8 +144,46 @@ public class AuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+            var errorLog = new ErrorLogs
+            {
+                Mensaje_error = ex.Message,
+                Enlace_error = HttpContext.Request.Path,
+                Fecha_error = DateTime.UtcNow
+            };
+
+            _context.ErrorLogs.Add(errorLog);
+            await _context.SaveChangesAsync();
             return Unauthorized(new { message = "Token inválido o expirado" });
+        }
+    }
+
+    [HttpDelete("logout")]
+    public async Task<IActionResult> Logout([FromBody] TokenDto tokenDto)
+    {
+        try
+        {
+            var tokenEntity = await _context.Tokens
+                .FirstOrDefaultAsync(t => t.JwtToken == tokenDto.Token);
+            if (tokenEntity == null)
+            {
+                return NotFound(new { message = "Token no encontrado" });
+            }
+            _context.Tokens.Remove(tokenEntity);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            var errorLog = new ErrorLogs
+            {
+                Mensaje_error = ex.Message,
+                Enlace_error = HttpContext.Request.Path,
+                Fecha_error = DateTime.UtcNow
+            };
+            _context.ErrorLogs.Add(errorLog);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(500, new { message = "Ocurrió un error al cerrar la sesión." });
         }
     }
 }

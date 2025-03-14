@@ -9,10 +9,10 @@ public class JwtService
 
     public JwtService(IConfiguration configuration)
     {
-        _configuration = configuration; // Inyectar IConfiguration
+        _configuration = configuration; 
     }
 
-    public string GenerateToken(int userId, string email)
+    public string GenerateToken(int userId, string email, string rol)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
         var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
@@ -21,9 +21,10 @@ public class JwtService
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Email, email)
-            }),
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+            new Claim(ClaimTypes.Email, email),
+            new Claim(ClaimTypes.Role, rol) 
+        }),
             Expires = DateTime.UtcNow.AddMinutes(double.Parse(jwtSettings["ExpireMinutes"])),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
