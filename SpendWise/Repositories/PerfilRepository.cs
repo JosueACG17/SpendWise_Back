@@ -1,16 +1,37 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpendWise.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpendWise.Repositories
 {
-    public class PerfilRepository
+    public interface IPerfilRepository
+    {
+        Task<IEnumerable<Perfil>> GetAllPerfilesAsync();
+        Task<Perfil> GetPerfilByIdAsync(int id);
+        Task<Perfil> CreatePerfilAsync(Perfil perfil);
+        Task UpdatePerfilAsync(Perfil perfil);
+        Task DeletePerfilAsync(int id);
+    }
+
+    public class PerfilRepository : IPerfilRepository
     {
         private readonly AppDbContext _context;
 
         public PerfilRepository(AppDbContext context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<Perfil>> GetAllPerfilesAsync()
+        {
+            return await _context.Perfiles.ToListAsync();
+        }
+
+        public async Task<Perfil> GetPerfilByIdAsync(int id)
+        {
+            return await _context.Perfiles.FindAsync(id);
         }
 
         public async Task<Perfil> CreatePerfilAsync(Perfil perfil)
@@ -20,9 +41,20 @@ namespace SpendWise.Repositories
             return perfil;
         }
 
-        public async Task<Perfil> GetPerfilByIdAsync(int id)
+        public async Task UpdatePerfilAsync(Perfil perfil)
         {
-            return await _context.Perfiles.FindAsync(id);
+            _context.Entry(perfil).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeletePerfilAsync(int id)
+        {
+            var perfil = await _context.Perfiles.FindAsync(id);
+            if (perfil != null)
+            {
+                _context.Perfiles.Remove(perfil);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

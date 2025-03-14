@@ -1,60 +1,98 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SpendWise.DTOs;
 using SpendWise.Models;
 using SpendWise.Services;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SpendWise.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class PerfilController : ControllerBase
     {
-        private readonly PerfilService _perfilService;
-        private readonly AppDbContext _context;
+        private readonly IPerfilService _perfilService;
+        private readonly ErrorLogService _errorLogService;
 
-        public PerfilController(PerfilService perfilService, AppDbContext context)
+        public PerfilController(IPerfilService perfilService, ErrorLogService errorLogService)
         {
             _perfilService = perfilService;
-            _context = context;
+            _errorLogService = errorLogService;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Perfil>> CreatePerfil([FromBody] PerfilDTO perfilDto)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Perfil>>> GetAllPerfiles()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            try
-            {
-                var foto = Request.Form.Files["Foto"];
-                var createdPerfil = await _perfilService.CreatePerfilAsync(perfilDto, foto);
-                return CreatedAtAction(nameof(GetPerfil), new { id = createdPerfil.Id }, createdPerfil);
-            }
-            catch (Exception ex)
-            {
-                var errorLog = new ErrorLogs
-                {
-                    Mensaje_error = ex.Message,
-                    Enlace_error = HttpContext.Request.Path,
-                    Fecha_error = DateTime.UtcNow
-                };
-                _context.ErrorLogs.Add(errorLog);
-                await _context.SaveChangesAsync();
-                return StatusCode(500, new { message = "Ocurrió un error interno al registrar el usuario." });
-            }
+            var perfiles = await _perfilService.GetAllPerfilesAsync();
+            return Ok(perfiles);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Perfil>> GetPerfil(int id)
+        public async Task<ActionResult<Perfil>> GetPerfilById(int id)
         {
-            var perfil = await _perfilService.GetPerfilByIdAsync(id);
-            if (perfil == null)
-                return NotFound();
+            try
+            {
+                var perfil = await _perfilService.GetPerfilByIdAsync(id);
+                if (perfil == null)
+                {
+                    return NotFound();
+                }
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                // Registrar el error usando el servicio
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, "Ocurrió un error al buscar el perfil por usuario");
+            }
+        }
 
-            return Ok(perfil);
+        [HttpPost]
+        public async Task<ActionResult<Perfil>> CreatePerfil([FromBody] PerfilDTO perfilDTO)
+        {
+            try
+            {
+                var perfil = await _perfilService.CreatePerfilAsync(perfilDTO);
+                return CreatedAtAction(nameof(GetPerfilById), new { id = perfil.Id }, perfil);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                // Registrar el error usando el servicio
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return NotFound("Perfil no encontrado");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePerfil(int id, [FromBody] PerfilDTO perfilDTO)
+        {
+            try
+            {
+                await _perfilService.UpdatePerfilAsync(id, perfilDTO);
+                return NoContent();
+            }
+            catch (Exception ex) // Captura cualquier excepción
+            {
+                // Registrar el error usando el servicio
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, "Ocurrió un error interno. Por favor, contacte al administrador.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePerfil(int id)
+        {
+            try
+            {
+                await _perfilService.DeletePerfilAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Registrar el error usando el servicio
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, "Ocurrió un error al eliminar el perfil.");
+            }
         }
     }
 }

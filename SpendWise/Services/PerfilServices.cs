@@ -1,43 +1,32 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http;
-using SpendWise.DTOs;
+﻿using SpendWise.DTOs;
 using SpendWise.Models;
 using SpendWise.Repositories;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SpendWise.Services
 {
-    public class PerfilService
+    public interface IPerfilService
     {
-        private readonly PerfilRepository _perfilRepository;
-        private readonly Cloudinary _cloudinary;
+        Task<IEnumerable<Perfil>> GetAllPerfilesAsync();
+        Task<Perfil> GetPerfilByIdAsync(int id);
+        Task<Perfil> CreatePerfilAsync(PerfilDTO perfilDTO);
+        Task UpdatePerfilAsync(int id, PerfilDTO perfilDTO);
+        Task DeletePerfilAsync(int id);
+    }
 
-        public PerfilService(PerfilRepository perfilRepository, Cloudinary cloudinary)
+    public class PerfilService : IPerfilService
+    {
+        private readonly IPerfilRepository _perfilRepository;
+
+        public PerfilService(IPerfilRepository perfilRepository)
         {
             _perfilRepository = perfilRepository;
-            _cloudinary = cloudinary;
         }
 
-        public async Task<Perfil> CreatePerfilAsync(PerfilDTO perfilDto, IFormFile foto)
+        public async Task<IEnumerable<Perfil>> GetAllPerfilesAsync()
         {
-            var perfil = new Perfil
-            {
-                NombreCompleto = perfilDto.NombreCompleto,
-                Telefono = perfilDto.Telefono,
-                FechaNacimiento = perfilDto.FechaNacimiento,
-                Genero = perfilDto.Genero,
-                FotoUrl = "/images/default.jpg" // Valor por defecto
-            };
-
-            if (foto != null && foto.Length > 0)
-            {
-                var uploadResult = await UploadImageToCloudinary(foto);
-                perfil.FotoUrl = uploadResult?.SecureUrl.ToString() ?? "/images/default.jpg";
-            }
-
-            return await _perfilRepository.CreatePerfilAsync(perfil);
+            return await _perfilRepository.GetAllPerfilesAsync();
         }
 
         public async Task<Perfil> GetPerfilByIdAsync(int id)
@@ -45,19 +34,38 @@ namespace SpendWise.Services
             return await _perfilRepository.GetPerfilByIdAsync(id);
         }
 
-        public async Task<ImageUploadResult?> UploadImageToCloudinary(IFormFile file)
+        public async Task<Perfil> CreatePerfilAsync(PerfilDTO perfilDTO)
         {
-            if (file == null || file.Length == 0)
-                return null;
-
-            await using var stream = file.OpenReadStream();
-            var uploadParams = new ImageUploadParams
+            var perfil = new Perfil
             {
-                File = new FileDescription(file.FileName, stream),
-                Folder = "perfiles"
+                UsuarioId = perfilDTO.UsuarioId,
+                NombreCompleto = perfilDTO.NombreCompleto,
+                Telefono = perfilDTO.Telefono,
+                FechaNacimiento = perfilDTO.FechaNacimiento,
+                Genero = perfilDTO.Genero
             };
 
-            return await _cloudinary.UploadAsync(uploadParams);
+            return await _perfilRepository.CreatePerfilAsync(perfil);
+        }
+
+        public async Task UpdatePerfilAsync(int id, PerfilDTO perfilDTO)
+        {
+            var perfil = await _perfilRepository.GetPerfilByIdAsync(id);
+            if (perfil != null)
+            {
+                perfil.UsuarioId = perfilDTO.UsuarioId;
+                perfil.NombreCompleto = perfilDTO.NombreCompleto;
+                perfil.Telefono = perfilDTO.Telefono;
+                perfil.FechaNacimiento = perfilDTO.FechaNacimiento;
+                perfil.Genero = perfilDTO.Genero;
+
+                await _perfilRepository.UpdatePerfilAsync(perfil);
+            }
+        }
+
+        public async Task DeletePerfilAsync(int id)
+        {
+            await _perfilRepository.DeletePerfilAsync(id);
         }
     }
 }

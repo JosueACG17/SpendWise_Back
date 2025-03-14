@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SpendWise.DTOs;
@@ -13,14 +14,18 @@ public class AuthController : ControllerBase
     private readonly UsuariosService _usuariosService;
     private readonly JwtService _jwtService;
     private readonly IConfiguration _configuration;
-    private readonly AppDbContext _context;
+    private readonly ErrorLogService _errorLogService;
 
-    public AuthController(UsuariosService usuariosService, JwtService jwtService, IConfiguration configuration, AppDbContext context)
+    public AuthController(
+        UsuariosService usuariosService,
+        JwtService jwtService,
+        IConfiguration configuration,
+        ErrorLogService errorLogService)
     {
         _usuariosService = usuariosService;
         _jwtService = jwtService;
         _configuration = configuration;
-        _context = context;
+        _errorLogService = errorLogService;
     }
 
     [HttpPost("register")]
@@ -30,9 +35,7 @@ public class AuthController : ControllerBase
         {
             var existingUser = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
             if (existingUser != null)
-            {
                 return BadRequest(new { message = "El correo ya está en uso." });
-            }
 
             var usuario = new Usuario
             {
@@ -46,14 +49,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            var errorLog = new ErrorLogs
-            {
-                Mensaje_error = ex.Message,
-                Enlace_error = HttpContext.Request.Path,
-                Fecha_error = DateTime.UtcNow
-            };
-            _context.ErrorLogs.Add(errorLog);
-            await _context.SaveChangesAsync();
+            await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
             return StatusCode(500, new { message = "Ocurrió un error interno al registrar el usuario." });
         }
     }
@@ -64,47 +60,34 @@ public class AuthController : ControllerBase
         try
         {
             if (authDTO == null)
-            {
                 return BadRequest(new { message = "Datos de inicio de sesión inválidos" });
-            }
 
             var usuario = await _usuariosService.GetUsuarioByEmailAsync(authDTO.Email);
             if (usuario == null || !BCrypt.Net.BCrypt.Verify(authDTO.Contraseña, usuario.Contraseña))
-            {
                 return Unauthorized(new { message = "Credenciales inválidas" });
-            }
 
             var token = _jwtService.GenerateToken(usuario.Id, usuario.Email);
             return Ok(new { token });
         }
         catch (Exception ex)
         {
-            var errorLog = new ErrorLogs
-            {
-                Mensaje_error = ex.Message,
-                Enlace_error = HttpContext.Request.Path,
-                Fecha_error = DateTime.UtcNow
-            };
-            _context.ErrorLogs.Add(errorLog);
-            await _context.SaveChangesAsync();
+            await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
             return StatusCode(500, new { message = "Ocurrió un error interno al iniciar sesión." });
         }
     }
 
     [Authorize]
     [HttpGet("validate-token")]
-    public IActionResult ValidateToken()
+    public async Task<IActionResult> ValidateToken()
     {
         try
         {
             var authHeader = Request.Headers["Authorization"].ToString();
             if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
-            {
                 return Unauthorized(new { message = "Token inválido" });
-            }
 
             var token = authHeader.Substring(7);
-            var jwtSettings = _configuration.GetSection("Jwt"); 
+            var jwtSettings = _configuration.GetSection("Jwt");
             var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -125,15 +108,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            var errorLog = new ErrorLogs
-            {
-                Mensaje_error = ex.Message,
-                Enlace_error = HttpContext.Request.Path,
-                Fecha_error = DateTime.UtcNow
-            };
-
-            _context.ErrorLogs.Add(errorLog);
-            _context.SaveChanges();
+            await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
             return Unauthorized(new { message = "Token inválido o expirado" });
         }
     }
