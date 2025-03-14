@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CloudinaryDotNet;
+using SpendWise.Repositories;
+using SpendWise.Services;
 using SpendWise.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,16 +17,6 @@ Env.Load();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
         Environment.GetEnvironmentVariable("DefaultConnection")));
-
-// Configuración de Cloudinary
-var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
-var account = new Account(
-    cloudinarySettings["CloudName"],
-    cloudinarySettings["ApiKey"],
-    cloudinarySettings["ApiSecret"]
-);
-var cloudinary = new Cloudinary(account);
-builder.Services.AddSingleton(cloudinary);
 
 // Configuraci�n de JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -72,6 +64,8 @@ builder.Services.AddScoped<ErrorLogRepository>();
 builder.Services.AddScoped<ErrorLogService>();
 builder.Services.AddHostedService<TokenCleanupService>();
 builder.Services.AddScoped<UserTokenService>();
+builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
+builder.Services.AddScoped<IPerfilService, PerfilService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -90,6 +84,8 @@ app.UseHttpsRedirection();
 
 // Habilitar CORS
 app.UseCors("AllowAllOrigins");
+
+app.UseMiddleware<SpendWise.Middlewares.ErrorLoggingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
