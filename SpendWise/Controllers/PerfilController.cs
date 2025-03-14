@@ -48,11 +48,12 @@ namespace SpendWise.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Perfil>> CreatePerfil([FromBody] PerfilDTO perfilDTO)
+        public async Task<ActionResult<Perfil>> CreatePerfil([FromForm] PerfilDTO perfilDTO)
         {
             try
             {
-                var perfil = await _perfilService.CreatePerfilAsync(perfilDTO);
+                string folderName = "perfiles";
+                var perfil = await _perfilService.CreatePerfilAsync(perfilDTO, folderName);
                 return CreatedAtAction(nameof(GetPerfilById), new { id = perfil.Id }, perfil);
             }
             catch (KeyNotFoundException ex)
@@ -68,7 +69,8 @@ namespace SpendWise.Controllers
         {
             try
             {
-                await _perfilService.UpdatePerfilAsync(id, perfilDTO);
+                string folderName = "perfiles";
+                await _perfilService.UpdatePerfilAsync(id, perfilDTO, folderName);
                 return NoContent();
             }
             catch (Exception ex) // Captura cualquier excepción

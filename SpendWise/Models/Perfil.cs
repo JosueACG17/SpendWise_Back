@@ -11,6 +11,7 @@ namespace SpendWise.Models
         public string Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }
+        public string? FotoUrl { get; set; }
         public Usuario Usuario { get; set; }
     }
 }
