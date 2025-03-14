@@ -66,6 +66,7 @@ builder.Services.AddHostedService<TokenCleanupService>();
 builder.Services.AddScoped<UserTokenService>();
 builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
 builder.Services.AddScoped<IPerfilService, PerfilService>();
+builder.Services.AddScoped<CloudinaryService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

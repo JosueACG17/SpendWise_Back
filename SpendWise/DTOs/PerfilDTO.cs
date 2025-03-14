@@ -7,5 +7,6 @@
         public string Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }
+        public IFormFile Foto { get; set; }
     }
 }
