@@ -33,11 +33,11 @@ public class AppDbContext : DbContext
             .HasForeignKey(u => u.RolId)
             .OnDelete(DeleteBehavior.Restrict); 
 
-        modelBuilder.Entity<Gasto>()
-            .HasOne(g => g.Usuario)
-            .WithMany(u => u.Gastos)
-            .HasForeignKey(g => g.UsuarioId)
-            .OnDelete(DeleteBehavior.Restrict); 
+        //modelBuilder.Entity<Gasto>()
+        //    .HasOne(g => g.Usuario)
+        //    .WithMany(u => u.Gastos)
+        //    .HasForeignKey(g => g.UsuarioId)
+        //    .OnDelete(DeleteBehavior.Restrict); 
 
         modelBuilder.Entity<Categoria>()
             .HasOne(c => c.Usuario)
@@ -57,11 +57,11 @@ public class AppDbContext : DbContext
             .HasForeignKey(e => e.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict); 
 
-        modelBuilder.Entity<Gasto>()
-            .HasOne(g => g.Categoria)
-            .WithMany(c => c.Gastos)
-            .HasForeignKey(g => g.CategoriaId)
-            .OnDelete(DeleteBehavior.Restrict); 
+        //modelBuilder.Entity<Gasto>()
+        //    .HasOne(g => g.Categoria)
+        //    .WithMany(c => c.Gastos)
+        //    .HasForeignKey(g => g.CategoriaId)
+        //    .OnDelete(DeleteBehavior.Restrict); 
 
         modelBuilder.Entity<Presupuesto>()
             .HasOne(p => p.Categoria)
