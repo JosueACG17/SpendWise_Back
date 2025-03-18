@@ -58,9 +58,13 @@ namespace SpendWise.Controllers
             }
             catch (KeyNotFoundException ex)
             {
-                // Registrar el error usando el servicio
                 await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
-                return NotFound("Perfil no encontrado");
+                return NotFound(new { mensaje = "Perfil no encontrado" });
+            }
+            catch (Exception ex)
+            {
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, new { mensaje = "Ocurrió un error interno al registrar el usuario", error = ex.Message });
             }
         }
 
