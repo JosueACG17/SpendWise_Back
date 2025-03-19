@@ -7,6 +7,8 @@ using CloudinaryDotNet;
 using SpendWise.Repositories;
 using SpendWise.Services;
 using SpendWise.Services;
+using SpendWise.Mappings;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,10 +69,19 @@ builder.Services.AddScoped<UserTokenService>();
 builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
 builder.Services.AddScoped<IPerfilService, PerfilService>();
 builder.Services.AddScoped<CloudinaryService>();
-
+builder.Services.AddScoped<PresupuestoRepository>();
+builder.Services.AddScoped<CategoriaRepository>();
+builder.Services.AddScoped<GastoRepository>();
+builder.Services.AddScoped<EtiquetaRepository>();
+builder.Services.AddScoped<PresupuestoService>();
+builder.Services.AddScoped<CategoriaService>();
+builder.Services.AddScoped<GastoService>();
+builder.Services.AddScoped<EtiquetaService>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
