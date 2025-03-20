@@ -13,6 +13,7 @@ namespace SpendWise.Repositories
         Task<Perfil> CreatePerfilAsync(Perfil perfil);
         Task UpdatePerfilAsync(Perfil perfil);
         Task DeletePerfilAsync(int id);
+        Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId);
     }
 
     public class PerfilRepository : IPerfilRepository
@@ -55,6 +56,12 @@ namespace SpendWise.Repositories
                 _context.Perfiles.Remove(perfil);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId)
+        {
+            return await _context.Perfiles
+                                .FirstOrDefaultAsync(p => p.UsuarioId == usuarioId);
         }
     }
 }

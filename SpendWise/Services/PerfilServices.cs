@@ -13,6 +13,7 @@ namespace SpendWise.Services
         Task<Perfil> CreatePerfilAsync(PerfilDTO perfilDTO, string folderName);
         Task UpdatePerfilAsync(int id, PerfilDTO perfilDTO, string folderName);
         Task DeletePerfilAsync(int id);
+        Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId);
     }
 
     public class PerfilService : IPerfilService
@@ -80,6 +81,11 @@ namespace SpendWise.Services
         public async Task DeletePerfilAsync(int id)
         {
             await _perfilRepository.DeletePerfilAsync(id);
+        }
+
+        public async Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId)
+        {
+            return await _perfilRepository.GetPerfilByUsuarioIdAsync(usuarioId);
         }
     }
 }
