@@ -100,5 +100,24 @@ namespace SpendWise.Controllers
                 return StatusCode(500, "Ocurrió un error al eliminar el perfil.");
             }
         }
+
+        [HttpGet("usuario/{usuarioId}")]
+        public async Task<ActionResult<Perfil>> GetPerfilByUsuarioId(int usuarioId)
+        {
+            try
+            {
+                var perfil = await _perfilService.GetPerfilByUsuarioIdAsync(usuarioId);
+                if (perfil == null)
+                {
+                    return NotFound();
+                }
+                return Ok(perfil);
+            }
+            catch (Exception ex)
+            {
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, "Ocurrió un error al buscar el perfil por usuario");
+            }
+        }
     }
 }
