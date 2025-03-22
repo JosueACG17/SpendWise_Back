@@ -78,6 +78,8 @@ builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<GastoService>();
 builder.Services.AddScoped<EtiquetaService>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddScoped<RolesRepository>();
+builder.Services.AddScoped<RolesService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
