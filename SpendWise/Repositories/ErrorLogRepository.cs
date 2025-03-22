@@ -26,4 +26,20 @@ public class ErrorLogRepository
         _context.ErrorLogs.Add(errorLog);
         await _context.SaveChangesAsync();
     }
+    public async Task<bool> DeleteByIdAsync(int id)
+    {
+        var errorLog = await _context.ErrorLogs.FindAsync(id);
+        if (errorLog == null) return false;
+
+        _context.ErrorLogs.Remove(errorLog);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task DeleteAllAsync()
+    {
+        _context.ErrorLogs.RemoveRange(_context.ErrorLogs);
+        await _context.SaveChangesAsync();
+    }
+
 }

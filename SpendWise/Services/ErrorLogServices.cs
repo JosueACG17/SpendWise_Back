@@ -28,4 +28,14 @@ public class ErrorLogService
 
         await _repository.CreateAsync(errorLog);
     }
+    public async Task<bool> DeleteErrorByIdAsync(int id)
+    {
+        return await _repository.DeleteByIdAsync(id);
+    }
+
+    public async Task DeleteAllErrorsAsync()
+    {
+        await _repository.DeleteAllAsync();
+    }
+
 }

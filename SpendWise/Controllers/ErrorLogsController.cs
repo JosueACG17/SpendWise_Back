@@ -19,4 +19,23 @@ public class ErrorLogsController : ControllerBase
         var errores = await _errorLogService.GetAllErrorsAsync();
         return Ok(errores);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteErrorLog(int id)
+    {
+        var deleted = await _errorLogService.DeleteErrorByIdAsync(id);
+        if (!deleted)
+        {
+            return NotFound(new { message = "Error log no encontrado." });
+        }
+        return NoContent();
+    }
+
+    [HttpDelete("all")]
+    public async Task<IActionResult> DeleteAllErrorLogs()
+    {
+        await _errorLogService.DeleteAllErrorsAsync();
+        return NoContent();
+    }
+
 }
