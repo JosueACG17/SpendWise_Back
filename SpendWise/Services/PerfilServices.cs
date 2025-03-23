@@ -14,6 +14,7 @@ namespace SpendWise.Services
         Task UpdatePerfilAsync(int id, PerfilDTO perfilDTO, string folderName);
         Task DeletePerfilAsync(int id);
         Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId);
+        Task UpdatePerfilByUsuarioIdAsync(int usuarioId, PerfilDTO perfilDTO, string folderName);
     }
 
     public class PerfilService : IPerfilService
@@ -86,6 +87,30 @@ namespace SpendWise.Services
         public async Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId)
         {
             return await _perfilRepository.GetPerfilByUsuarioIdAsync(usuarioId);
+        }
+
+        public async Task UpdatePerfilByUsuarioIdAsync(int usuarioId, PerfilDTO perfilDTO, string folderName)
+        {
+            var perfil = await _perfilRepository.GetPerfilByUsuarioIdAsync(usuarioId);
+            if (perfil == null)
+            {
+                throw new KeyNotFoundException("Perfil no encontrado");
+            }
+
+            // Actualizar los campos del perfil
+            perfil.NombreCompleto = perfilDTO.NombreCompleto;
+            perfil.Telefono = perfilDTO.Telefono;
+            perfil.FechaNacimiento = perfilDTO.FechaNacimiento;
+            perfil.Genero = perfilDTO.Genero;
+
+            // Si hay una nueva foto, actualizarla
+            if (perfilDTO.Foto != null)
+            {
+                var uploadResult = await _cloudinaryService.UploadImageToCloudinary(perfilDTO.Foto, folderName);
+                perfil.FotoUrl = uploadResult?.SecureUrl.ToString() ?? "/images/default.jpg";
+            }
+
+            await _perfilRepository.UpdatePerfilAsync(perfil);
         }
     }
 }
