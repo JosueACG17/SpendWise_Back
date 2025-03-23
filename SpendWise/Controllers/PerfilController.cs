@@ -69,7 +69,7 @@ namespace SpendWise.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePerfil(int id, [FromBody] PerfilDTO perfilDTO)
+        public async Task<IActionResult> UpdatePerfil(int id, [FromForm] PerfilDTO perfilDTO)
         {
             try
             {
@@ -117,6 +117,27 @@ namespace SpendWise.Controllers
             {
                 await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
                 return StatusCode(500, "Ocurrió un error al buscar el perfil por usuario");
+            }
+        }
+
+        [HttpPut("usuario/{usuarioId}")]
+        public async Task<IActionResult> UpdatePerfilByUsuarioId(int usuarioId, [FromForm] PerfilDTO perfilDTO)
+        {
+            try
+            {
+                string folderName = "perfiles";
+                await _perfilService.UpdatePerfilByUsuarioIdAsync(usuarioId, perfilDTO, folderName);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return NotFound(new { mensaje = "Perfil no encontrado" });
+            }
+            catch (Exception ex)
+            {
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, new { mensaje = "Ocurrió un error interno al actualizar el perfil", error = ex.Message });
             }
         }
     }
