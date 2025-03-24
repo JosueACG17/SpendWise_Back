@@ -1,6 +1,5 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using Microsoft.Extensions.Configuration;
 
 namespace SpendWise.Services
 {
@@ -23,6 +22,14 @@ namespace SpendWise.Services
         {
             if (file == null || file.Length == 0)
                 return null;
+
+            // Lista de tipos MIME permitidos para imágenes
+            var allowedMimeTypes = new[] { "image/jpeg", "image/png" };
+
+            if (!allowedMimeTypes.Contains(file.ContentType))
+            {
+                throw new InvalidOperationException("Solo se permiten archivos de imagen.");
+            }
 
             await using var stream = file.OpenReadStream();
             var uploadParams = new ImageUploadParams
