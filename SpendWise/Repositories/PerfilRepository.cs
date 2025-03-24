@@ -60,8 +60,7 @@ namespace SpendWise.Repositories
 
         public async Task<Perfil> GetPerfilByUsuarioIdAsync(int usuarioId)
         {
-            return await _context.Perfiles
-                                .FirstOrDefaultAsync(p => p.UsuarioId == usuarioId);
+            return await _context.Perfiles.FirstOrDefaultAsync(p => p.UsuarioId == usuarioId);
         }
     }
 }

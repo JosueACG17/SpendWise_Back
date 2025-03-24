@@ -41,7 +41,6 @@ namespace SpendWise.Controllers
             }
             catch (Exception ex)
             {
-                // Registrar el error usando el servicio
                 await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
                 return StatusCode(500, "Ocurrió un error al buscar el perfil por usuario");
             }
@@ -77,9 +76,8 @@ namespace SpendWise.Controllers
                 await _perfilService.UpdatePerfilAsync(id, perfilDTO, folderName);
                 return NoContent();
             }
-            catch (Exception ex) // Captura cualquier excepción
+            catch (Exception ex)
             {
-                // Registrar el error usando el servicio
                 await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
                 return StatusCode(500, "Ocurrió un error interno. Por favor, contacte al administrador.");
             }
@@ -95,7 +93,6 @@ namespace SpendWise.Controllers
             }
             catch (Exception ex)
             {
-                // Registrar el error usando el servicio
                 await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
                 return StatusCode(500, "Ocurrió un error al eliminar el perfil.");
             }

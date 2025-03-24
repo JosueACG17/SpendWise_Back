@@ -97,13 +97,11 @@ namespace SpendWise.Services
                 throw new KeyNotFoundException("Perfil no encontrado");
             }
 
-            // Actualizar los campos del perfil
             perfil.NombreCompleto = perfilDTO.NombreCompleto;
             perfil.Telefono = perfilDTO.Telefono;
             perfil.FechaNacimiento = perfilDTO.FechaNacimiento;
             perfil.Genero = perfilDTO.Genero;
 
-            // Si hay una nueva foto, actualizarla
             if (perfilDTO.Foto != null)
             {
                 var uploadResult = await _cloudinaryService.UploadImageToCloudinary(perfilDTO.Foto, folderName);
