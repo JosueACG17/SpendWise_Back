@@ -49,5 +49,10 @@ namespace SpendWise.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<bool> IsCategoryInUseAsync(int categoryId)
+        {
+            return await _context.Presupuestos.AnyAsync(p => p.CategoriaId == categoryId);
+        }
+
     }
 }
