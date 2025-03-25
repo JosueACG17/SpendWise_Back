@@ -46,5 +46,9 @@ namespace SpendWise.Services
         {
             await _repository.DeleteAsync(id);
         }
+        public async Task<bool> IsCategoryInUseAsync(int categoryId)
+        {
+            return await _repository.IsCategoryInUseAsync(categoryId);
+        }
     }
 }

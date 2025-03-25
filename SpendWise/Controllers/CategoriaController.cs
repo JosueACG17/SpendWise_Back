@@ -53,5 +53,12 @@ namespace SpendWise.Controllers
             await _service.DeleteAsync(id);
             return NoContent();
         }
+
+        [HttpGet("isInUse/{categoryId}")]
+        public async Task<ActionResult<bool>> IsCategoryInUse(int categoryId)
+        {
+            var inUse = await _service.IsCategoryInUseAsync(categoryId);
+            return Ok(new { inUse });
+        }
     }
 }
