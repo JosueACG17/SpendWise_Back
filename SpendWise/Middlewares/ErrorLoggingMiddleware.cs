@@ -16,8 +16,6 @@
             try
             {
                 await _next(context);
-
-                // Aquí capturas errores como 404, 401, etc.
                 if (context.Response.StatusCode >= 400 && context.Response.StatusCode < 600)
                 {
                     using (var scope = _serviceProvider.CreateScope())
@@ -30,7 +28,6 @@
             }
             catch (Exception ex)
             {
-                // Captura de errores no controlados (excepciones reales)
                 using (var scope = _serviceProvider.CreateScope())
                 {
                     var errorLogService = scope.ServiceProvider.GetRequiredService<ErrorLogService>();

@@ -21,6 +21,5 @@ namespace SpendWise.Models
         public ICollection<Categoria> Categorias { get; set; } = new List<Categoria>();
         public ICollection<Gasto> Gastos { get; set; } = new List<Gasto>();
         public ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
-        public ICollection<Etiqueta> Etiquetas { get; set; } = new List<Etiqueta>();
     }
 }

@@ -18,6 +18,5 @@ namespace SpendWise.Models
         public string Descripcion { get; set; }
         public Usuario Usuario { get; set; }
         public Categoria Categoria { get; set; }
-        public ICollection<Etiqueta> Etiquetas { get; set; } = new List<Etiqueta>();
     }
 }
