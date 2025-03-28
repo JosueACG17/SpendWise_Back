@@ -79,9 +79,13 @@ namespace SpendWise.Controllers
                 if (usuario == null)
                     return NotFound(new { message = "Usuario no encontrado" });
 
-                usuario.Email = usuarioDTO.Email;
+            usuario.Email = usuarioDTO.Email;
+            usuario.RolId = usuarioDTO.RolId;
+
+            if (!string.IsNullOrEmpty(usuarioDTO.Contraseña))
+            {
                 usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuarioDTO.Contraseña);
-                usuario.RolId = usuarioDTO.RolId;
+            }
 
                 await _usuariosService.UpdateUsuarioAsync(usuario);
                 return Ok(new { message = "Usuario actualizado exitosamente" });

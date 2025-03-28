@@ -16,34 +16,29 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Datos iniciales para Roles
         modelBuilder.Entity<Rol>().HasData(
             new Rol { Id = 1, Nombre = "Administrador" },
             new Rol { Id = 2, Nombre = "Usuario" }
         );
 
-        // Configurar la relación entre Usuario y Rol
         modelBuilder.Entity<Usuario>()
             .HasOne(u => u.Rol)
-            .WithMany(r => r.Usuarios) // Relación uno a muchos
+            .WithMany(r => r.Usuarios) 
             .HasForeignKey(u => u.RolId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Configurar la relación entre Gasto y Usuario
         modelBuilder.Entity<Gasto>()
             .HasOne(g => g.Usuario)
             .WithMany(u => u.Gastos)
             .HasForeignKey(g => g.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Configurar la relación entre Categoria y Usuario
         modelBuilder.Entity<Categoria>()
             .HasOne(c => c.Usuario)
             .WithMany(u => u.Categorias)
             .HasForeignKey(c => c.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Configurar la relación entre Presupuesto y Usuario
         modelBuilder.Entity<Presupuesto>()
             .HasOne(p => p.Usuario)
             .WithMany(u => u.Presupuestos)
@@ -57,21 +52,18 @@ public class AppDbContext : DbContext
             .HasForeignKey(g => g.CategoriaId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Configurar la relación entre Presupuesto y Categoria
         modelBuilder.Entity<Presupuesto>()
             .HasOne(p => p.Categoria)
             .WithMany(c => c.Presupuestos)
             .HasForeignKey(p => p.CategoriaId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Configurar la relación uno a uno entre Perfil y Usuario
         modelBuilder.Entity<Perfil>()
             .HasOne(p => p.Usuario)
             .WithOne(u => u.Perfil)
             .HasForeignKey<Perfil>(p => p.UsuarioId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Asegurar que el Email sea único
         modelBuilder.Entity<Usuario>()
             .HasIndex(u => u.Email)
             .IsUnique();
