@@ -110,5 +110,20 @@ namespace SpendWise.Controllers
                 return StatusCode(500, "Ocurrió un error mientras la categoria esta en uso");
             }
         }
+
+        [HttpGet("hasExpenses/{categoryId}")]
+        public async Task<ActionResult<bool>> HasExpenses(int categoryId)
+        {
+            try
+            {
+                var hasExpenses = await _service.HasExpensesAsync(categoryId);
+                return Ok(new { hasExpenses });
+            }
+            catch (Exception ex)
+            {
+                await _errorLogService.CreateErrorAsync(ex.Message, HttpContext.Request.Path);
+                return StatusCode(500, "Ocurrió un error al verificar los gastos de la categoría");
+            }
+        }
     }
 }

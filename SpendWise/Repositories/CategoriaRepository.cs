@@ -53,6 +53,9 @@ namespace SpendWise.Repositories
         {
             return await _context.Presupuestos.AnyAsync(p => p.CategoriaId == categoryId);
         }
-
+        public async Task<bool> HasExpensesAsync(int categoryId)
+        {
+            return await _context.Gastos.AnyAsync(g => g.CategoriaId == categoryId);
+        }
     }
 }

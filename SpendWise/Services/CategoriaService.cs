@@ -4,6 +4,7 @@ using SpendWise.Repositories;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SpendWise.Services
 {
@@ -49,6 +50,10 @@ namespace SpendWise.Services
         public async Task<bool> IsCategoryInUseAsync(int categoryId)
         {
             return await _repository.IsCategoryInUseAsync(categoryId);
+        }
+        public async Task<bool> HasExpensesAsync(int categoryId)
+        {
+            return await _repository.HasExpensesAsync(categoryId);
         }
     }
 }
