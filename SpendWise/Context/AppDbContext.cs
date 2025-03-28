@@ -10,7 +10,6 @@ public class AppDbContext : DbContext
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Gasto> Gastos { get; set; }
     public DbSet<Presupuesto> Presupuestos { get; set; }
-    public DbSet<Etiqueta> Etiquetas { get; set; }
     public DbSet<ErrorLogs> ErrorLogs { get; set; }
     public DbSet<Rol> Roles { get; set; }
     public DbSet<Token> Tokens { get; set; }
@@ -46,12 +45,7 @@ public class AppDbContext : DbContext
             .HasForeignKey(p => p.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.Entity<Etiqueta>()
-            .HasOne(e => e.Usuario)
-            .WithMany(u => u.Etiquetas)
-            .HasForeignKey(e => e.UsuarioId)
-            .OnDelete(DeleteBehavior.Restrict);
-
+        // Configurar la relación entre Gasto y Categoria
         modelBuilder.Entity<Gasto>()
             .HasOne(g => g.Categoria)
             .WithMany(c => c.Gastos)

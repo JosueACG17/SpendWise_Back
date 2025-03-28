@@ -11,7 +11,6 @@ namespace SpendWise.Mappings
             CreateMap<Gasto, GastoDTO>().ReverseMap();
             CreateMap<Presupuesto, PresupuestoDTO>().ReverseMap();
             CreateMap<Categoria, CategoriaDTO>().ReverseMap();
-            CreateMap<Etiqueta, EtiquetaDTO>().ReverseMap();
         }
     }
 }
